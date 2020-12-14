@@ -1,0 +1,45 @@
+### 开发环境，单机模式配置
+server:
+  port: 8761
+spring:
+  profiles: default
+  application:
+    name: hy-eureka-server
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+
+---
+### eureka-server-1配置
+server:
+  port: 8761
+spring:
+  profiles: eureka-server-1
+  application:
+    name: hy-eureka-server-1
+eureka:
+  instance:
+    hostname: hy-eureka-server-1
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    service-url:
+      defaultZone: http://hy-eureka-server-2:8761/eureka/
+
+---
+### eureka-server-2配置
+server:
+  port: 8761
+spring:
+  profiles: eureka-server-2
+  application:
+    name: hy-eureka-server-2
+eureka:
+  instance:
+    hostname: hy-eureka-server-2
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    service-url:
+      defaultZone: http://hy-eureka-server-1:8761/eureka/
